@@ -1,0 +1,55 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Meeting Silencer",
+  "@appTitle": { "description": "App name" },
+
+  "navSchedules": "Schedules",
+  "@navSchedules": { "description": "Bottom nav: schedules tab" },
+
+  "navWorldClock": "World Clock",
+  "@navWorldClock": { "description": "Bottom nav: world clock tab" },
+
+  "navSettings": "Settings",
+  "@navSettings": { "description": "Bottom nav: settings tab" },
+
+  "addSchedule": "Add schedule",
+  "@addSchedule": { "description": "FAB tooltip and form title" },
+
+  "noSchedules": "No schedules yet",
+  "@noSchedules": { "description": "Empty state heading" },
+
+  "noSchedulesHint": "Tap + to add your first meeting schedule",
+  "@noSchedulesHint": { "description": "Empty state sub-text" },
+
+  "modeSilent": "Silent",
+  "@modeSilent": { "description": "Silent mode label" },
+
+  "modeVibrate": "Vibrate",
+  "@modeVibrate": { "description": "Vibrate mode label" },
+
+  "settingsLanguage": "Language",
+  "@settingsLanguage": { "description": "Language setting label" },
+
+  "settingsDefaultMode": "Default mode",
+  "@settingsDefaultMode": { "description": "Default mode setting label" },
+
+  "settingsAlertBefore": "Alert before meeting",
+  "@settingsAlertBefore": { "description": "Alert timing label" },
+
+  "minutes": "{count, plural, one{{count} minute} other{{count} minutes}}",
+  "@minutes": {
+    "description": "Minutes count with plural support",
+    "placeholders": {
+      "count": { "type": "num", "format": "compact" }
+    }
+  },
+
+  "notificationTitle": "Upcoming meeting: {title}",
+  "@notificationTitle": {
+    "description": "Pre-meeting notification title",
+    "placeholders": {
+      "title": { "type": "String" }
+    }
+  }
+}

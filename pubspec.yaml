@@ -1,0 +1,37 @@
+name: meeting_silencer
+description: Automatically switches device to silent or vibration mode during scheduled meeting hours.
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State management
+  provider: ^6.1.2
+
+  # Notifications
+  flutter_local_notifications: ^17.2.0
+
+  # Timezone support
+  timezone: ^0.9.4
+  flutter_timezone: ^5.1.0
+
+  # Local storage (no sensitive data — sandboxed to app)
+  shared_preferences: ^2.3.2
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true  # enables flutter gen-l10n

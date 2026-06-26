@@ -1,0 +1,18 @@
+{
+  "@@locale": "fr",
+
+  "appTitle": "Silencieux de Réunion",
+  "navSchedules": "Horaires",
+  "navWorldClock": "Horloge Mondiale",
+  "navSettings": "Paramètres",
+  "addSchedule": "Ajouter un horaire",
+  "noSchedules": "Aucun horaire",
+  "noSchedulesHint": "Appuyez sur + pour ajouter votre premier horaire",
+  "modeSilent": "Silencieux",
+  "modeVibrate": "Vibreur",
+  "settingsLanguage": "Langue",
+  "settingsDefaultMode": "Mode par défaut",
+  "settingsAlertBefore": "Alerte avant la réunion",
+  "minutes": "{count, plural, one{{count} minute} other{{count} minutes}}",
+  "notificationTitle": "Réunion à venir : {title}"
+}
