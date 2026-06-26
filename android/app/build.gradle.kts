@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.meeting_silencer"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -41,4 +41,16 @@ flutter {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+}
+
+subprojects {
+    afterEvaluate {
+        if (plugins.hasPlugin("org.jetbrains.kotlin.android")) {
+            kotlin {
+                compilerOptions {
+                    jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+                }
+            }
+        }
+    }
 }
