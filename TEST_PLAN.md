@@ -25,11 +25,11 @@ Tests that meeting schedules can be created, edited, deleted, and persisted. The
 
 | ID | Test Name | Steps | Expected Result | Result | Notes |
 |----|-----------|-------|----------------|--------|-------|
-| TC-01 | Add a new meeting | Open app → tap Schedules tab → tap Add → enter title, start time, end time, select repeat days → save. | New schedule appears in the list with correct title and times. | PASS | |
-| TC-02 | Edit an existing meeting | Long-press or tap edit on a schedule → change the title and end time → save. | Schedule list shows updated values. | FAIL | Long-press edit not working, no edit path available |
-| TC-03 | Delete a meeting | Swipe or tap delete on a schedule → confirm deletion. | Schedule is removed from the list and no longer silences the phone. | PASS | |
-| TC-04 | Enable / disable a schedule | Toggle the enable switch on a schedule off, then back on. | Disabled schedule does not trigger silencing. Re-enabling restores it. | PASS | |
-| TC-05 | Schedules persist after app restart | Add a schedule → close the app fully → reopen. | Schedule is still present with all fields intact (SharedPreferences check). | PASS | |
+| TC-01 | Add a new meeting | Open app → tap Schedules tab → tap Add → enter title, start time, end time, select repeat days → save. | New schedule appears in the list with correct title and times. | PENDING | |
+| TC-02 | Edit an existing meeting | Long-press or tap edit on a schedule → change the title and end time → save. | Schedule list shows updated values. | PENDING | |
+| TC-03 | Delete a meeting | Swipe or tap delete on a schedule → confirm deletion. | Schedule is removed from the list and no longer silences the phone. | PENDING | |
+| TC-04 | Enable / disable a schedule | Toggle the enable switch on a schedule off, then back on. | Disabled schedule does not trigger silencing. Re-enabling restores it. | PENDING | |
+| TC-05 | Schedules persist after app restart | Add a schedule → close the app fully → reopen. | Schedule is still present with all fields intact (SharedPreferences check). | PENDING | |
 
 ---
 
@@ -39,11 +39,11 @@ Tests that the core silencing feature works on the physical Android device. Thes
 
 | ID | Test Name | Steps | Expected Result | Result | Notes |
 |----|-----------|-------|----------------|--------|-------|
-| TC-06 | Phone silences at meeting start | Create a schedule starting 1–2 min from now → wait for the minute to tick over. | Ringer mode switches to silent automatically. Verify by calling the phone. | PASS | Requires DND access permission granted manually. First attempt failed with SecurityException until permission enabled |
-| TC-07 | Phone restores after meeting ends | Enable the "restore normal mode" toggle → let the meeting end (or set end time 1 min away). | Ringer mode returns to normal after the meeting window closes. | PASS | |
-| TC-08 | Restore toggle off — stays silent | Disable "restore normal mode" toggle → let a meeting end. | Phone stays silent. User must manually restore ringer. | FAIL | Restore toggle off was ignored, phone returned to normal ringer after meeting end instead of staying silent |
-| TC-09 | Vibrate mode schedule | Create a schedule set to vibrate mode → wait for start time. | Phone switches to vibrate, not full silent. | PASS | |
-| TC-10 | Do Not Disturb permission handling | Revoke DND permission in Android settings → open app → trigger a meeting. | App requests DND permission or shows an appropriate message. Does not crash. | FAIL | Unhandled PlatformException when DND permission missing, no prompt shown to user |
+| TC-06 | Phone silences at meeting start | Create a schedule starting 1–2 min from now → wait for the minute to tick over. | Ringer mode switches to silent automatically. Verify by calling the phone. | PENDING | |
+| TC-07 | Phone restores after meeting ends | Enable the "restore normal mode" toggle → let the meeting end (or set end time 1 min away). | Ringer mode returns to normal after the meeting window closes. | PENDING | |
+| TC-08 | Restore toggle off — stays silent | Disable "restore normal mode" toggle → let a meeting end. | Phone stays silent. User must manually restore ringer. | PENDING | |
+| TC-09 | Vibrate mode schedule | Create a schedule set to vibrate mode → wait for start time. | Phone switches to vibrate, not full silent. | PENDING | |
+| TC-10 | Do Not Disturb permission handling | Revoke DND permission in Android settings → open app → trigger a meeting. | App requests DND permission or shows an appropriate message. Does not crash. | PENDING | |
 
 ---
 
@@ -64,7 +64,7 @@ Tests that local notifications fire correctly before or at meeting start.
 
 | ID | Test Name | Steps | Expected Result | Result | Notes |
 |----|-----------|-------|----------------|--------|-------|
-| TC-13 | Notification fires before meeting | Create a schedule starting in a few minutes → wait. | A local notification appears on the lock screen or notification bar. | FAIL | No notification at meeting start. End-of-meeting notification received. Start notification may be suppressed by the app silencing itself |
+| TC-13 | Notification fires before meeting | Create a schedule starting in a few minutes → wait. | A local notification appears on the lock screen or notification bar. | PENDING | |
 | TC-14 | No duplicate notifications | Add the same schedule twice → wait for meeting time. | Only one notification fires per meeting. | PENDING | |
 | TC-15 | Notification permission denied | Deny notification permission in device settings → trigger a meeting. | App does not crash. Silencing still works even without notification permission. | PENDING | |
 
@@ -109,14 +109,13 @@ Tests for unusual or boundary conditions.
 
 | Section | Total | Pass | Fail | Skip | Pending |
 |---------|-------|------|------|------|---------|
-| Schedule Management | 5 | 4 | 1 | | 0 |
-| Auto-Silencing (Android) | 5 | 3 | 2 | | 0 |
+| Schedule Management | 5 | | | | 5 |
+| Auto-Silencing (Android) | 5 | | | | 5 |
 | Auto-Silencing (iOS) | 2 | | | | 2 |
-| Notifications | 3 | | 1 | | 2 |
+| Notifications | 3 | | | | 3 |
 | World Clock | 2 | | | | 2 |
 | Settings and Language | 3 | | | | 3 |
 | Edge Cases | 3 | | | | 3 |
-| **Total** | **23** | **7** | **4** | | **12** |
 | **Total** | **23** | | | | **23** |
 
 ---
