@@ -113,4 +113,3 @@ Platform-specific sections (2 and 3) count toward their own platform only. N/A c
 2. TC-08: The restore normal mode toggle is ignored when off. Phone returns to normal ringer after every meeting regardless of the setting.
 3. TC-10: App throws an unhandled PlatformException and crashes the flow when DND access permission is not granted, instead of prompting the user. SecurityException at MainActivity.kt line 19.
 4. TC-13: No notification fires at meeting start. An end-of-meeting notification is received. The start notification may be suppressed by the app's own silencing.
-
