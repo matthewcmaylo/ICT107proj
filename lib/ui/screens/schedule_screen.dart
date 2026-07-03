@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/models/meeting_schedule.dart';
+import '../../l10n/app_localizations.dart'; // Provides translated strings for this screen
 import '../../logic/providers/schedule_provider.dart';
 import 'add_schedule_screen.dart';
 
@@ -10,19 +11,24 @@ class ScheduleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve translated strings for the current locale
+    final l10n = AppLocalizations.of(context);
     final schedules = context.watch<ScheduleProvider>().schedules;
     return Scaffold(
-      appBar: AppBar(title: const Text('Schedules')),
+      // Translated app bar title
+      appBar: AppBar(title: Text(l10n.navSchedules)),
       body: schedules.isEmpty
-          ? const Center(
+          ? Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.schedule, size: 64, color: Colors.grey),
-                  SizedBox(height: 16),
-                  Text('No schedules yet', style: TextStyle(fontSize: 18)),
-                  SizedBox(height: 8),
-                  Text('Tap + to add your first meeting schedule', style: TextStyle(color: Colors.grey)),
+                  const Icon(Icons.schedule, size: 64, color: Colors.grey),
+                  const SizedBox(height: 16),
+                  // Translated empty-state heading
+                  Text(l10n.noSchedules, style: const TextStyle(fontSize: 18)),
+                  const SizedBox(height: 8),
+                  // Translated empty-state hint
+                  Text(l10n.noSchedulesHint, style: const TextStyle(color: Colors.grey)),
                 ],
               ),
             )
@@ -34,7 +40,8 @@ class ScheduleScreen extends StatelessWidget {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const AddScheduleScreen())),
-        tooltip: 'Add schedule',
+        // Translated FAB tooltip
+        tooltip: l10n.addSchedule,
         child: const Icon(Icons.add),
       ),
     );

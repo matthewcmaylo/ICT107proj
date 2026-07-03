@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/models/meeting_schedule.dart';
+import '../../l10n/app_localizations.dart'; // Provides translated strings for this screen
 import '../../logic/providers/schedule_provider.dart';
 import '../../logic/providers/settings_provider.dart';
 
@@ -97,13 +98,17 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve translated strings for the current locale
+    final l10n = AppLocalizations.of(context);
     final scheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Schedule'),
+        // Translated app bar title
+        title: Text(l10n.addSchedule),
         actions: [
           TextButton(
             onPressed: _saving ? null : _save,
+            // 'Save' has no l10n key — kept in English
             child: _saving
                 ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
                 : const Text('Save'),
@@ -114,7 +119,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
         padding: const EdgeInsets.all(16),
         children: [
 
-          // Title
+          // Title field — label/hint have no l10n keys, kept in English
           TextField(
             controller: _titleController,
             decoration: const InputDecoration(
@@ -127,7 +132,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
           ),
           const SizedBox(height: 24),
 
-          // Time
+          // Time section — 'Time', 'Start', 'End' have no l10n keys, kept in English
           Text('Time', style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 8),
           Row(
@@ -139,7 +144,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
           ),
           const SizedBox(height: 24),
 
-          // Days
+          // Days section — day abbreviations have no l10n keys, kept in English
           Text('Repeat on', style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 8),
           Row(
@@ -168,33 +173,35 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
           ),
           const SizedBox(height: 24),
 
-          // Mode
+          // Mode section — 'Device mode during meeting' has no l10n key, kept in English
           Text('Device mode during meeting', style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 8),
           SegmentedButton<String>(
-            segments: const [
-              ButtonSegment(value: 'silent', label: Text('Silent'), icon: Icon(Icons.volume_off)),
-              ButtonSegment(value: 'vibrate', label: Text('Vibrate'), icon: Icon(Icons.vibration)),
+            segments: [
+              // Translated mode labels
+              ButtonSegment(value: 'silent', label: Text(l10n.modeSilent), icon: const Icon(Icons.volume_off)),
+              ButtonSegment(value: 'vibrate', label: Text(l10n.modeVibrate), icon: const Icon(Icons.vibration)),
             ],
             selected: {_mode},
             onSelectionChanged: (val) => setState(() => _mode = val.first),
           ),
           const SizedBox(height: 24),
 
-          // Alert timing
-          Text('Alert before meeting', style: Theme.of(context).textTheme.titleSmall),
+          // Alert timing — translated section header
+          Text(l10n.settingsAlertBefore, style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
             children: [5, 10, 15, 30].map((mins) => ChoiceChip(
-              label: Text('$mins min'),
+              // Translated minute label (handles singular/plural per locale)
+              label: Text(l10n.minutes(mins)),
               selected: _alertMinutes == mins,
               onSelected: (_) => setState(() => _alertMinutes = mins),
             )).toList(),
           ),
           const SizedBox(height: 24),
 
-          // Restore after meeting
+          // Restore section — 'After meeting ends', toggle labels have no l10n keys, kept in English
           Text('After meeting ends', style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 8),
           Card(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/app_localizations.dart';
 import 'schedule_screen.dart';
 import 'settings_screen.dart';
 import 'world_clock_screen.dart';
@@ -29,21 +30,25 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) =>
             setState(() => _selectedIndex = index),
-        destinations: const [
+        // Removed const so labels can be resolved from AppLocalizations at runtime
+        destinations: [
           NavigationDestination(
-            icon: Icon(Icons.schedule_outlined),
-            selectedIcon: Icon(Icons.schedule),
-            label: 'Schedules',
+            icon: const Icon(Icons.schedule_outlined),
+            selectedIcon: const Icon(Icons.schedule),
+            // Translated nav label for the schedules tab
+            label: AppLocalizations.of(context).navSchedules,
           ),
           NavigationDestination(
-            icon: Icon(Icons.public_outlined),
-            selectedIcon: Icon(Icons.public),
-            label: 'World Clock',
+            icon: const Icon(Icons.public_outlined),
+            selectedIcon: const Icon(Icons.public),
+            // Translated nav label for the world clock tab
+            label: AppLocalizations.of(context).navWorldClock,
           ),
           NavigationDestination(
-            icon: Icon(Icons.settings_outlined),
-            selectedIcon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: const Icon(Icons.settings_outlined),
+            selectedIcon: const Icon(Icons.settings),
+            // Translated nav label for the settings tab
+            label: AppLocalizations.of(context).navSettings,
           ),
         ],
       ),

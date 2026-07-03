@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/app_localizations.dart'; // Provides translated strings for this screen
 import '../../logic/providers/settings_provider.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -18,15 +19,19 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve translated strings for the current locale
+    final l10n = AppLocalizations.of(context);
     final settings = context.watch<SettingsProvider>();
     final scheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      // Translated app bar title
+      appBar: AppBar(title: Text(l10n.navSettings)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          _SectionHeader(title: 'Language'),
+          // Translated section header for language picker
+          _SectionHeader(title: l10n.settingsLanguage),
           Card(
             child: Column(
               children: _languages.asMap().entries.map((entry) {
@@ -47,14 +52,16 @@ class SettingsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          _SectionHeader(title: 'Default mode for new schedules'),
+          // Translated section header for default mode selector
+          _SectionHeader(title: l10n.settingsDefaultMode),
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: SegmentedButton<String>(
-                segments: const [
-                  ButtonSegment(value: 'silent', label: Text('Silent'), icon: Icon(Icons.volume_off)),
-                  ButtonSegment(value: 'vibrate', label: Text('Vibrate'), icon: Icon(Icons.vibration)),
+                segments: [
+                  // Translated mode labels
+                  ButtonSegment(value: 'silent', label: Text(l10n.modeSilent), icon: const Icon(Icons.volume_off)),
+                  ButtonSegment(value: 'vibrate', label: Text(l10n.modeVibrate), icon: const Icon(Icons.vibration)),
                 ],
                 selected: {settings.defaultMode},
                 onSelectionChanged: (val) => settings.setDefaultMode(val.first),
@@ -63,14 +70,16 @@ class SettingsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          _SectionHeader(title: 'Default alert before meeting'),
+          // Translated section header for alert timing
+          _SectionHeader(title: l10n.settingsAlertBefore),
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Wrap(
                 spacing: 8,
                 children: [5, 10, 15, 30].map((mins) => ChoiceChip(
-                  label: Text('$mins min'),
+                  // Translated minute label (handles singular/plural per locale)
+                  label: Text(l10n.minutes(mins)),
                   selected: settings.defaultAlertMinutes == mins,
                   onSelected: (_) => settings.setDefaultAlertMinutes(mins),
                 )).toList(),
@@ -79,6 +88,7 @@ class SettingsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
+          // "Privacy" has no l10n key — kept in English
           _SectionHeader(title: 'Privacy'),
           Card(
             child: Padding(
