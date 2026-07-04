@@ -81,8 +81,8 @@ Tests for unusual or boundary conditions. Run on all platforms. Note: on web, "s
 
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TC-21 | Overlapping schedules | Create two schedules with overlapping time windows, wait for start. | App silences correctly. Does not crash or behave unexpectedly. | PENDING | | PENDING | | PASS | Verified on Chrome: schedules save and display correctly. |
-| TC-22 | Schedule spanning midnight | Create a schedule from 11:45 PM to 12:15 AM. | Silencing triggers at 11:45 PM and restores at 12:15 AM correctly. | PENDING | | PENDING | | PASS | Verified on Chrome: schedule saves and displays correctly. |
+| TC-21 | Overlapping schedules | Create two schedules with overlapping time windows, wait for start. | App silences correctly. Does not crash or behave unexpectedly. | PENDING | | PENDING | | PASS | Verified on Chrome: schedules save and display correctly, No crash. |
+| TC-22 | Schedule spanning midnight | Create a schedule from 11:45 PM to 12:15 AM. | Silencing triggers at 11:45 PM and restores at 12:15 AM correctly. | PENDING | | PENDING | | PASS | Verified on Chrome: schedule saves and displays correctly, no crash. |
 | TC-23 | No schedules added | Delete all schedules, use the app normally. | App shows empty state. Does not crash. Phone ringer is unaffected. | PENDING | | PENDING | | PASS | Verified on Chrome: empty state displayed without crashing. |
 
 ## Summary
