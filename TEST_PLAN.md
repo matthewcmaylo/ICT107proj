@@ -19,9 +19,9 @@ Tests that meeting schedules can be created, edited, deleted, and persisted. Run
 
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TC-01 | Add a new meeting | Open app, tap Schedules tab, tap Add, enter title "test meeting", start time 9:00 AM, end time 10:00 AM, select repeat days (Mon, Tue, Wed, Thu, Fri), save. | New schedule appears in the list with correct title "test meeting", time 9:00 AM–10:00 AM, and repeat days Mon–Fri. | PASS | | | | 
-| TC-02 | Edit an existing meeting - "test meeting" | Long-press or tap edit on a schedule, change the title and end time, save. | Schedule list shows updated values. | FAIL | No edit option or edit path available in Chrome | | | |
-TC-03 | Delete a meeting - "test meeting" | Swipe or tap delete on a schedule, confirm deletion. | Schedule is removed from the list and no longer silences the phone. | PASS | Meeting deleted successfully in Chrome, item removed from schedule list | | | |
+| TC-01 | Add a new meeting | Open app, tap Schedules tab, tap Add, enter title "test meeting", start time 9:00 AM, end time 10:00 AM, select repeat days (Mon, Tue, Wed, Thu, Fri), save. | New schedule appears in the list with correct title "test meeting", time 9:00 AM–10:00 AM, and repeat days Mon–Fri. | PASS | | PENDING | | PASS | Created "test meeting" (9:00 AM–10:00 AM), repeat days Mon–Fri. Schedule displayed correctly in Chrome. |
+| TC-02 | Edit an existing meeting | Long-press or tap edit on a schedule, change the title and end time, save. | Schedule list shows updated values. | FAIL | Long-press edit not working, no edit path available | PENDING | | FAIL | No edit option or edit path available in Chrome. |
+| TC-03 | Delete a meeting | Swipe or tap delete on a schedule, confirm deletion. | Schedule is removed from the list and no longer silences the phone. | PASS | | PENDING | | PASS | Meeting deleted successfully in Chrome; item removed from the schedule list. |
 | TC-04 | Enable / disable a schedule | Toggle the enable switch on a schedule off, then back on. | Disabled schedule does not trigger silencing. Re-enabling restores it. | PASS | | PENDING | | PENDING | |
 | TC-05 | Schedules persist after restart | Add a schedule, close the app fully, reopen. | Schedule is still present with all fields intact (SharedPreferences check). | PASS | | PENDING | | PENDING | |
 
