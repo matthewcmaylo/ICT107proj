@@ -89,7 +89,7 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(height: 24),
 
           // "Privacy" has no l10n key — kept in English
-          _SectionHeader(title: 'Privacy'),
+          _SectionHeader(title: 'Privacy & Security'),
           Card(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -101,7 +101,7 @@ class SettingsScreen extends StatelessWidget {
                   Expanded(
                     child: Text(
                       'All data is stored locally on your device. '
-                      'No personal information is collected or transmitted.',
+                      'No personal information is collected, shared or transmitted.',
                       style: TextStyle(fontSize: 13, color: scheme.onSurfaceVariant),
                     ),
                   ),

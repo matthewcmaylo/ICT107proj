@@ -35,7 +35,10 @@ class _WorldClockScreenState extends State<WorldClockScreen> {
     final provider = context.read<TimezoneProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('World Clock')),
+     appBar: AppBar(
+  title: const Text('World Clock'),
+  centerTitle: true,
+), 
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: TimeZoneConstants.majorCities.length,
@@ -108,7 +111,7 @@ class _ClockCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(city.name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                  Text(city.name, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
                   Text('${city.countryCode} · $offset', style: TextStyle(fontSize: 12, color: scheme.onSurfaceVariant)),
                   Text(_dateString, style: TextStyle(fontSize: 12, color: scheme.onSurfaceVariant)),
                 ],
