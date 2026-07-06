@@ -53,8 +53,8 @@ Tests that local notifications fire correctly before or at meeting start. Not su
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | TC-13 | Notification fires before meeting | Create a schedule starting in a few minutes, wait. | A local notification appears on the lock screen or notification bar. | FAIL | No notification at meeting start. End-of-meeting notification received. Start notification may be suppressed by the app silencing itself. | PENDING | | N/A | Not supported on web. |
-| TC-14 | No duplicate notifications | Add the same schedule twice, wait for meeting time. | Only one notification should fire per meeting. | PENDING | | PENDING | | N/A | Duplicate schedules were able to be created in Chrome; however, local notifications are not supported on the web, so notification behavior could not be tested. |
-| TC-15 | Notification permission denied | Deny notification permission in device settings, trigger a meeting. | App does not crash. Silencing still works without notification permission. | PENDING | | PENDING | | N/A | Not supported on web. |
+| TC-14 | No duplicate notifications | Add the same schedule twice, wait for meeting time. | Only one notification should fire per meeting. | FAIL | Duplicate schedules each fire their own notification, two received for one meeting. Tested via end notification since start notification never fires (TC-13) | | PENDING | | N/A | Duplicate schedules were able to be created in Chrome; however, local notifications are not supported on the web, so notification behavior could not be tested. |
+| TC-15 | Notification permission denied | Deny notification permission in device settings, trigger a meeting. | App does not crash. Silencing still works without notification permission. | PASS | No crash, silencing works without notification permission | | PENDING | | N/A | Not supported on web. |
 
 ## Section 5 - World Clock
 
@@ -62,8 +62,8 @@ Tests for the world clock screen. Run on all platforms.
 
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TC-16 | Time zones display correctly | Open World Clock tab, check displayed times for listed cities. | Times match the real-world current time for each city. | PENDING | | PENDING | | PASS | World Clock displayed correct times for listed cities |
-| TC-17 | Time updates in real time | Leave the World Clock tab open for 1-2 minutes. | Displayed times increment correctly and do not stay frozen. | PENDING | | PENDING | | PASS | Times updated in real time, no freezing |
+| TC-16 | Time zones display correctly | Open World Clock tab, check displayed times for listed cities. | Times match the real-world current time for each city. | PASS | City times matched real world times | | PENDING | | PASS | World Clock displayed correct times for listed cities |
+| TC-17 | Time updates in real time | Leave the World Clock tab open for 1-2 minutes. | Displayed times increment correctly and do not stay frozen. | PASS | Times updated in real time, no freezing | | PENDING | | PASS | Times updated in real time, no freezing |
 
 ## Section 6 - Settings and Language
 
@@ -71,9 +71,9 @@ Tests for the multilingual UI and settings persistence. Run on all platforms.
 
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TC-18 | Language switches to French | Settings, Language, select French. | All UI labels change to French immediately. | PENDING | | PENDING | | PASS | UI switched to French correctly |
-| TC-19 | Language switches to Arabic | Settings, Language, select Arabic. | UI shows Arabic text. Layout adjusts for RTL if implemented. | PENDING | | PENDING | | PASS | UI switched to Arabic correctly |
-| TC-20 | Language preference persists | Switch to Nepali, close and reopen the app. | App reopens in Nepali. | PENDING | | PENDING | | PASS | Language preference persisted after app restart |
+| TC-18 | Language switches to French | Settings, Language, select French. | All UI labels change to French immediately. | PASS | Minor labels e.g. Save remain in English by design | | PENDING | | PASS | UI switched to French correctly |
+| TC-19 | Language switches to Arabic | Settings, Language, select Arabic. | UI shows Arabic text. Layout adjusts for RTL if implemented. | PASS | Arabic text displayed correctly | | PENDING | | PASS | UI switched to Arabic correctly |
+| TC-20 | Language preference persists | Switch to Nepali, close and reopen the app. | App reopens in Nepali. | PASS | Language persisted after full app restart | | PENDING | | PASS | Language preference persisted after app restart |
 
 ## Section 7 - Edge Cases
 
@@ -81,9 +81,9 @@ Tests for unusual or boundary conditions. Run on all platforms. Note: on web, "s
 
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TC-21 | Overlapping schedules | Create two schedules with overlapping time windows, wait for start. | App silences correctly. Does not crash or behave unexpectedly. | PENDING | | PENDING | | PASS | Verified on Chrome: schedules save and display correctly, No crash. |
-| TC-22 | Schedule spanning midnight | Create a schedule from 11:45 PM to 12:15 AM. | Silencing triggers at 11:45 PM and restores at 12:15 AM correctly. | PENDING | | PENDING | | PASS | Verified on Chrome: schedule saves and displays correctly, no crash. |
-| TC-23 | No schedules added | Delete all schedules, use the app normally. | App shows empty state. Does not crash. Phone ringer is unaffected. | PENDING | | PENDING | | PASS | Verified on Chrome: empty state displayed without crashing. |
+| TC-21 | Overlapping schedules | Create two schedules with overlapping time windows, wait for start. | App silences correctly. Does not crash or behave unexpectedly. | PASS | Stayed silent through first meeting end during overlap, restored only after second meeting ended | | PENDING | | PASS | Verified on Chrome: schedules save and display correctly, No crash. |
+| TC-22 | Schedule spanning midnight | Create a schedule from 11:45 PM to 12:15 AM. | Silencing triggers at 11:45 PM and restores at 12:15 AM correctly. | FAIL | Schedule spanning midnight never triggers. Phone stayed on normal ringer through entire 23:45 to 00:15 window. Likely broken time comparison when end time is earlier than start time | | PENDING | | PASS | Verified on Chrome: schedule saves and displays correctly, no crash. |
+| TC-23 | No schedules added | Delete all schedules, use the app normally. | App shows empty state. Does not crash. Phone ringer is unaffected. | PASS | Empty state displayed correctly, no crash, ringer unaffected | | PENDING | | PASS | Verified on Chrome: empty state displayed without crashing. |
 
 ## Summary
 
@@ -91,7 +91,7 @@ Platform-specific sections (2 and 3) count toward their own platform only. N/A c
 
 | Platform | Applicable Tests | Pass | Fail | Skip | Pending |
 | --- | --- | --- | --- | --- | --- |
-| Android | 21 | 7 | 4 | | 10 |
+| Android | 21 | 15 | 6 | | 0 |
 | iOS | 18 | | | | 18 |
 | Web | 13 | 12 | 1 | | 0 |
 
@@ -112,4 +112,6 @@ Platform-specific sections (2 and 3) count toward their own platform only. N/A c
 1. TC-02: No way to edit an existing schedule. Long-press does not trigger edit and no edit button exists.
 2. TC-08: The restore normal mode toggle is ignored when off. Phone returns to normal ringer after every meeting regardless of the setting.
 3. TC-10: App throws an unhandled PlatformException and crashes the flow when DND access permission is not granted, instead of prompting the user. SecurityException at MainActivity.kt line 19.
-4. TC-13: No notification fires at meeting start. An end-of-meeting notification is received. The start notification may be suppressed by the app's own silencing.
+4. TC-13: No notification fires at meeting start. An end-of-meeting notification is received. The start notification may be suppressed by the app silencing itself.
+5. TC-14: App allows duplicate schedules to be saved and each duplicate fires its own notification.
+6. TC-22: Midnight-spanning schedules never activate. The active-meeting check fails when end time is earlier than start time.
