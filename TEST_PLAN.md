@@ -53,7 +53,7 @@ Tests that local notifications fire correctly before or at meeting start. Not su
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | TC-13 | Notification fires before meeting | Create a schedule starting in a few minutes, wait. | A local notification appears on the lock screen or notification bar. | FAIL | No notification at meeting start. End-of-meeting notification received. Start notification may be suppressed by the app silencing itself. | PENDING | | N/A | Not supported on web. |
-| TC-14 | No duplicate notifications | Add the same schedule twice, wait for meeting time. | Only one notification should fire per meeting. | PENDING | | PENDING | | N/A | Not supported on web. |
+| TC-14 | No duplicate notifications | Add the same schedule twice, wait for meeting time. | Only one notification should fire per meeting. | PENDING | | PENDING | | N/A | Duplicate schedules were able to be created in Chrome; however, local notifications are not supported on the web, so notification behavior could not be tested. |
 | TC-15 | Notification permission denied | Deny notification permission in device settings, trigger a meeting. | App does not crash. Silencing still works without notification permission. | PENDING | | PENDING | | N/A | Not supported on web. |
 
 ## Section 5 - World Clock
