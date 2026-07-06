@@ -5,7 +5,7 @@ App: Meeting Silencer (Flutter)
 
 Test Device (Android): Motorola Razr 40, Android 15 - tested by Patricia
 Test Device (iOS): iPhone with Xcode simulator or physical device - tested by Josh / Matt
-Test Platform (Web): Chrome browser via `flutter run -d chrome` - tested by Karina
+Test Platform (Web): Chrome browser via `flutter run -d chrome` - tested by Karina, Subarna, Chander
 
 ## How to Use This Document
 
