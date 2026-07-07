@@ -20,7 +20,7 @@ Tests that meeting schedules can be created, edited, deleted, and persisted. Run
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | TC-01 | Add a new meeting | Open app, tap Schedules tab, tap Add, enter title "test meeting", start time 9:00 AM, end time 10:00 AM, select repeat days (Mon, Tue, Wed, Thu, Fri), save. | New schedule appears in the list with correct title "test meeting", time 9:00 AM–10:00 AM, and repeat days Mon–Fri. | PASS | | PENDING | | PASS | Created "test meeting" (9:00 AM–10:00 AM), repeat days Mon–Fri. Schedule displayed correctly in Chrome. |
-| TC-02 | Edit an existing meeting | Long-press or tap edit on a schedule, change the title and end time, save. | Schedule list shows updated values. | FAIL | Long-press edit not working, no edit path available | PENDING | | FAIL | No edit option or edit path available in Chrome. |
+| TC-02 | Edit an existing meeting | Long-press or tap edit on a schedule, change the title and end time, save. | Schedule list shows updated values. | FAIL | Long-press edit not working, no edit path available | FAIL | No edit button present, same defect as Android. Tested by Josh Arbias and Jan Matthew Cmaylo. | FAIL | No edit option or edit path available in Chrome. |
 | TC-03 | Delete a meeting | Swipe or tap delete on a schedule, confirm deletion. | Schedule is removed from the list and no longer silences the phone. | PASS | | PENDING | | PASS | Meeting deleted successfully in Chrome; item removed from the schedule list. |
 | TC-04 | Enable / disable a schedule | Toggle the enable switch on a schedule off, then back on. | Disabled schedule does not trigger silencing. Re-enabling restores it. | PASS | | PENDING | | PASS | Enable and disable toggle worked correctly in Chrome |
 | TC-05 | Schedules persist after restart | Add a schedule, close the app fully, reopen. | Schedule is still present with all fields intact (SharedPreferences check). | PASS | | PENDING | | PASS | Schedule persisted after closing and reopening the app in Chrome. Default mode and alert time preferences also stored correctly |
@@ -43,8 +43,8 @@ Tests for iOS volume control via volume_controller. Requires Xcode and an iOS si
 
 | ID | Test Name | Steps | Expected Result | Result | Notes |
 | --- | --- | --- | --- | --- | --- |
-| TC-11 | Volume set to 0 at meeting start | Create a schedule starting 1-2 min from now, wait for the minute to tick over. | Ringer volume drops to 0. Verify in Control Centre. | PENDING | |
-| TC-12 | Volume restored after meeting ends | Enable the restore toggle, let meeting end. | Volume returns to the previous level. | PENDING | |
+| TC-11 | Volume set to 0 at meeting start | Create a schedule starting 1-2 min from now, wait for the minute to tick over. | Ringer volume drops to 0. Verify in Control Centre. | FAIL | Device did not go into silent mode. Tested on physical iPhone (Josh Arbias and Jan Matthew Cmaylo). |
+| TC-12 | Volume restored after meeting ends | Enable the restore toggle, let meeting end. | Volume returns to the previous level. | FAIL | Device did not vibrate. Tested on physical iPhone (Josh Arbias and Jan Matthew Cmaylo). |
 
 ## Section 4 - Notifications
 
@@ -52,7 +52,7 @@ Tests that local notifications fire correctly before or at meeting start. Not su
 
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TC-13 | Notification fires before meeting | Create a schedule starting in a few minutes, wait. | A local notification appears on the lock screen or notification bar. | FAIL | No notification at meeting start. End-of-meeting notification received. Start notification may be suppressed by the app silencing itself. | PENDING | | N/A | Not supported on web. |
+| TC-13 | Notification fires before meeting | Create a schedule starting in a few minutes, wait. | A local notification appears on the lock screen or notification bar. | FAIL | No notification at meeting start. End-of-meeting notification received. Start notification may be suppressed by the app silencing itself. | FAIL | No notification appeared at meeting start, same defect as Android. Tested by Josh Arbias and Jan Matthew Cmaylo. | N/A | Not supported on web. |
 | TC-14 | No duplicate notifications | Add the same schedule twice, wait for meeting time. | Only one notification should fire per meeting. | FAIL | Duplicate schedules each fire their own notification, two received for one meeting. Tested via end notification since start notification never fires (TC-13) | | PENDING | | N/A | Duplicate schedules were able to be created in Chrome; however, local notifications are not supported on the web, so notification behavior could not be tested. |
 | TC-15 | Notification permission denied | Deny notification permission in device settings, trigger a meeting. | App does not crash. Silencing still works without notification permission. | PASS | No crash, silencing works without notification permission | | PENDING | | N/A | Not supported on web. |
 
