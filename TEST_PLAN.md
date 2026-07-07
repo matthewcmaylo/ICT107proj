@@ -115,3 +115,12 @@ Platform-specific sections (2 and 3) count toward their own platform only. N/A c
 4. TC-13: No notification fires at meeting start. An end-of-meeting notification is received. The start notification may be suppressed by the app silencing itself.
 5. TC-14: App allows duplicate schedules to be saved and each duplicate fires its own notification.
 6. TC-22: Midnight-spanning schedules never activate. The active-meeting check fails when end time is earlier than start time.
+
+## Known Defects (from iOS testing)
+Tested by Josh Arbias and Jan Matthew Cmaylo on physical iPhone (iOS 26.5).
+
+1. TC-10: App crashes on launch when DND permission is not granted. No permission prompt appears. Same behaviour as Android defect. App does not stay open long enough to request permissions.
+2. TC-11: Device did not go into silent mode at meeting start. volume_controller plugin does not control ringer volume on iOS.
+3. TC-12: Device did not switch to vibrate mode at meeting end. Vibrate mode not triggered via volume_controller on iOS.
+4. TC-02: No edit option available for existing schedules. Same defect as Android, no long-press or edit button present.
+5. TC-13: No notification fired at meeting start. Same defect as Android, only end-of-meeting notification received.
