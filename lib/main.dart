@@ -26,6 +26,12 @@ void main() async {
   await notificationService.init();
 
   final ringerService = RingerService();
+  // TC-10 fix: ringer control needs Do Not Disturb access on Android.
+  // On first launch without it, open the system settings screen so the
+  // user can grant it instead of crashing later when silencing triggers.
+  if (!await ringerService.hasDndAccess()) {
+    await ringerService.openDndSettings();
+  }
 
   final scheduleProvider = ScheduleProvider(storageService, notificationService);
   final settingsProvider = SettingsProvider(storageService);
