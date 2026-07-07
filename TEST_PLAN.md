@@ -107,6 +107,17 @@ Platform-specific sections (2 and 3) count toward their own platform only. N/A c
 | Edge Cases | 3 | 2 | 1 | | 0 |
 | Total | 21 | 15 | 6 | | 0 |
 
+### iOS breakdown
+| Section | Total | Pass | Fail | Skip | Pending |
+| --- | --- | --- | --- | --- | --- |
+| Schedule Management | 5 | 4 | 1 | | 0 |
+| Auto-Silencing (iOS) | 2 | 0 | 2 | | 0 |
+| Notifications | 3 | 0 | 1 | | 2 |
+| World Clock | 2 | 2 | 0 | | 0 |
+| Settings and Language | 3 | 3 | 0 | | 0 |
+| Edge Cases | 3 | 3 | 0 | | 0 |
+| Total | 18 | 12 | 4 | | 2 |
+
 ## Known Defects (from Android testing)
 
 1. TC-02: No way to edit an existing schedule. Long-press does not trigger edit and no edit button exists.
