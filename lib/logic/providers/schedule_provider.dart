@@ -62,17 +62,10 @@ class ScheduleProvider extends ChangeNotifier {
 
   /// Checks whether the device is currently inside any enabled schedule.
   bool get isCurrentlyInMeeting {
+    // Delegates to MeetingSchedule.isActiveAt, which handles
+    // midnight-spanning windows correctly (TC-22 fix)
     final now = DateTime.now();
-    final currentMinutes = now.hour * 60 + now.minute;
-    final weekday = now.weekday; // 1 = Monday, 7 = Sunday
-
-    for (final s in enabledSchedules) {
-      if (!s.repeatDays.contains(weekday)) continue;
-      final start = s.startHour * 60 + s.startMinute;
-      final end = s.endHour * 60 + s.endMinute;
-      if (currentMinutes >= start && currentMinutes < end) return true;
-    }
-    return false;
+    return enabledSchedules.any((s) => s.isActiveAt(now));
   }
 
   Future<void> _persist() => _storage.saveSchedules(_schedules);

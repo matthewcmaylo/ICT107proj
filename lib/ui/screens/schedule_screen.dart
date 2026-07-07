@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'add_schedule_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/models/meeting_schedule.dart';

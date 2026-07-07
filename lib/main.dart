@@ -39,16 +39,9 @@ void main() async {
   // Check every minute whether we are inside a meeting window.
   Timer.periodic(const Duration(minutes: 1), (_) async {
     if (scheduleProvider.isCurrentlyInMeeting) {
+      // Same midnight-aware check as the provider (TC-22 fix)
       final activeSchedule = scheduleProvider.enabledSchedules.firstWhere(
-        (s) {
-          final now = DateTime.now();
-          final currentMinutes = now.hour * 60 + now.minute;
-          final start = s.startHour * 60 + s.startMinute;
-          final end = s.endHour * 60 + s.endMinute;
-          return s.repeatDays.contains(now.weekday) &&
-              currentMinutes >= start &&
-              currentMinutes < end;
-        },
+        (s) => s.isActiveAt(DateTime.now()),
       );
       await ringerService.setMode(activeSchedule.mode);
     } else {

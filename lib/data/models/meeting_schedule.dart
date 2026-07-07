@@ -60,4 +60,30 @@ class MeetingSchedule {
     alertMinutesBefore: json['alertMinutesBefore'] as int,
     restoreAfter: json['restoreAfter'] as bool? ?? true,
   );
+
+  /// True when [now] falls inside this schedule's window (TC-22 fix).
+  /// Handles windows that span midnight, e.g. 11:45 PM to 12:15 AM,
+  /// where the naive start <= now < end comparison can never be true.
+  bool isActiveAt(DateTime now) {
+    if (!isEnabled) return false;
+    final current = now.hour * 60 + now.minute;
+    final start = startHour * 60 + startMinute;
+    final end = endHour * 60 + endMinute;
+
+    if (start < end) {
+      // Normal same-day window
+      return repeatDays.contains(now.weekday) && current >= start && current < end;
+    }
+    // Window wraps past midnight. Before midnight we match today's weekday;
+    // after midnight the schedule belongs to yesterday's weekday.
+    if (current >= start) {
+      return repeatDays.contains(now.weekday);
+    }
+    if (current < end) {
+      final yesterday = now.weekday == 1 ? 7 : now.weekday - 1;
+      return repeatDays.contains(yesterday);
+    }
+    return false;
+  }
+
 }
