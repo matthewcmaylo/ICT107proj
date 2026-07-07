@@ -25,7 +25,23 @@ class ScheduleProvider extends ChangeNotifier {
 
   // ── CRUD ──────────────────────────────────────────────────────────────────
 
+  /// Returns true when another schedule already has the same title,
+  /// times, and repeat days. Used to block duplicates (TC-14 fix).
+  bool isDuplicate(MeetingSchedule schedule) {
+    return _schedules.any((s) =>
+        s.id != schedule.id &&
+        s.title == schedule.title &&
+        s.startHour == schedule.startHour &&
+        s.startMinute == schedule.startMinute &&
+        s.endHour == schedule.endHour &&
+        s.endMinute == schedule.endMinute &&
+        s.repeatDays.join(',') == schedule.repeatDays.join(','));
+  }
+
   Future<void> addSchedule(MeetingSchedule schedule) async {
+    // TC-14 fix: identical schedules each fired their own notification.
+    // Silently ignore an exact duplicate instead of adding it.
+    if (isDuplicate(schedule)) return;
     _schedules.add(schedule);
     await _persist();
     await _notifications.scheduleAlertNotification(schedule);

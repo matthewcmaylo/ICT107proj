@@ -99,11 +99,20 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
       alertMinutesBefore: _alertMinutes,
       restoreAfter: _restoreAfter,
     );
+    final provider = context.read<ScheduleProvider>();
+    // Block exact duplicates so only one notification fires per meeting (TC-14)
+    if (widget.existing == null && provider.isDuplicate(schedule)) {
+      setState(() => _saving = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('This schedule already exists')),
+      );
+      return;
+    }
     // Update the existing schedule in edit mode, otherwise add a new one
     if (widget.existing != null) {
-      await context.read<ScheduleProvider>().updateSchedule(schedule);
+      await provider.updateSchedule(schedule);
     } else {
-      await context.read<ScheduleProvider>().addSchedule(schedule);
+      await provider.addSchedule(schedule);
     }
     if (mounted) Navigator.of(context).pop();
   }

@@ -29,12 +29,26 @@ class NotificationService {
     for (int i = 0; i < schedule.repeatDays.length; i++) {
       final weekday = schedule.repeatDays[i];
 
-      // Pre-meeting alert
-      final alertTime = _nextWeekdayInstance(
+      // Pre-meeting alert.
+      // TC-13 fix: if the alert time (start minus alertMinutesBefore) has
+      // already passed but the meeting start is still ahead, the old logic
+      // pushed the alert a full week out and nothing fired today. In that
+      // case schedule the alert for one minute from now instead.
+      var alertTime = _nextWeekdayInstance(
         weekday: weekday,
         hour: schedule.startHour, minute: schedule.startMinute,
         subtractMinutes: schedule.alertMinutesBefore, from: now,
       );
+      final startToday = tz.TZDateTime(
+        tz.local, now.year, now.month, now.day,
+        schedule.startHour, schedule.startMinute,
+      );
+      if (startToday.weekday == weekday &&
+          startToday.isAfter(now) &&
+          alertTime.difference(now).inDays >= 1) {
+        // Alert window already passed today but the meeting has not started
+        alertTime = now.add(const Duration(minutes: 1));
+      }
       await _plugin.zonedSchedule(
         _notificationId(schedule.id, i, 0),
         'Upcoming meeting: ${schedule.title}',
