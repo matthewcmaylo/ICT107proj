@@ -92,7 +92,7 @@ Platform-specific sections (2 and 3) count toward their own platform only. N/A c
 | Platform | Applicable Tests | Pass | Fail | Skip | Pending |
 | --- | --- | --- | --- | --- | --- |
 | Android | 21 | 15 | 6 | | 0 |
-| iOS | 18 | 0 | 4 | | 14 |
+| iOS | 18 | 12 | 4 | | 2 |
 | Web | 13 | 12 | 1 | | 0 |
 
 ### Android breakdown
