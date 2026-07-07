@@ -101,11 +101,11 @@ Platform-specific sections (2 and 3) count toward their own platform only. N/A c
 | --- | --- | --- | --- | --- | --- |
 | Schedule Management | 5 | 4 | 1 | | 0 |
 | Auto-Silencing (Android) | 5 | 3 | 2 | | 0 |
-| Notifications | 3 | | 1 | | 2 |
-| World Clock | 2 | | | | 2 |
-| Settings and Language | 3 | | | | 3 |
-| Edge Cases | 3 | | | | 3 |
-| Total | 21 | 7 | 4 | | 10 |
+| Notifications | 3 | 1 | 2 | | 0 |
+| World Clock | 2 | 2 | 0 | | 0 |
+| Settings and Language | 3 | 3 | 0 | | 0 |
+| Edge Cases | 3 | 2 | 1 | | 0 |
+| Total | 21 | 15 | 6 | | 0 |
 
 ## Known Defects (from Android testing)
 
