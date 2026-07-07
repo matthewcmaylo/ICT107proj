@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'add_schedule_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/models/meeting_schedule.dart';
@@ -107,6 +108,13 @@ class _ScheduleCard extends StatelessWidget {
               ),
             ),
             Switch(value: schedule.isEnabled, onChanged: (_) => provider.toggleSchedule(schedule.id)),
+            // Edit button: opens the add screen prefilled with this schedule
+            IconButton(
+              icon: const Icon(Icons.edit_outlined),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => AddScheduleScreen(existing: schedule)),
+              ),
+            ),
             IconButton(
               icon: const Icon(Icons.delete_outline),
               color: scheme.error,

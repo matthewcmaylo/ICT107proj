@@ -7,7 +7,9 @@ import '../../logic/providers/schedule_provider.dart';
 import '../../logic/providers/settings_provider.dart';
 
 class AddScheduleScreen extends StatefulWidget {
-  const AddScheduleScreen({super.key});
+  // When editing, the existing schedule is passed in; null means add mode
+  final MeetingSchedule? existing;
+  const AddScheduleScreen({super.key, this.existing});
 
   @override
   State<AddScheduleScreen> createState() => _AddScheduleScreenState();
@@ -31,6 +33,17 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
     final settings = context.read<SettingsProvider>();
     _mode = settings.defaultMode;
     _alertMinutes = settings.defaultAlertMinutes;
+    // Edit mode: prefill every field from the schedule being edited
+    final e = widget.existing;
+    if (e != null) {
+      _titleController.text = e.title;
+      _startTime = TimeOfDay(hour: e.startHour, minute: e.startMinute);
+      _endTime = TimeOfDay(hour: e.endHour, minute: e.endMinute);
+      _selectedDays..clear()..addAll(e.repeatDays);
+      _mode = e.mode;
+      _alertMinutes = e.alertMinutesBefore;
+      _restoreAfter = e.restoreAfter;
+    }
   }
 
   @override
@@ -76,7 +89,8 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
     }
     setState(() => _saving = true);
     final schedule = MeetingSchedule(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      // Reuse the original id when editing so the schedule is updated, not duplicated
+      id: widget.existing?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
       title: title,
       startHour: _startTime.hour, startMinute: _startTime.minute,
       endHour: _endTime.hour, endMinute: _endTime.minute,
@@ -85,7 +99,12 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
       alertMinutesBefore: _alertMinutes,
       restoreAfter: _restoreAfter,
     );
-    await context.read<ScheduleProvider>().addSchedule(schedule);
+    // Update the existing schedule in edit mode, otherwise add a new one
+    if (widget.existing != null) {
+      await context.read<ScheduleProvider>().updateSchedule(schedule);
+    } else {
+      await context.read<ScheduleProvider>().addSchedule(schedule);
+    }
     if (mounted) Navigator.of(context).pop();
   }
 
