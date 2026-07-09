@@ -46,8 +46,12 @@ class NotificationService {
       if (startToday.weekday == weekday &&
           startToday.isAfter(now) &&
           alertTime.difference(now).inDays >= 1) {
-        // Alert window already passed today but the meeting has not started
-        alertTime = now.add(const Duration(minutes: 1));
+        // Alert window already passed today but the meeting has not started.
+        // Schedule 5 seconds from now so iOS shows it as a banner rather
+        // than suppressing it as a foreground notification (TC-13 iOS fix).
+        alertTime = tz.TZDateTime.from(
+          DateTime.now().add(const Duration(seconds: 5)), tz.local,
+        );
       }
       await _plugin.zonedSchedule(
         _notificationId(schedule.id, i, 0),
