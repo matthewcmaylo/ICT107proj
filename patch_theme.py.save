@@ -1,4 +1,10 @@
-import 'package:flutter/material.dart';
+# Rebrand theme to Midnight Sand palette
+
+# ---- app_theme.dart ----
+p = 'lib/core/theme/app_theme.dart'
+s = open(p).read()
+
+s = """import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme._();
@@ -87,3 +93,14 @@ class AppTheme {
         ),
       );
 }
+"""
+
+open(p, 'w').write(s)
+print('app_theme.dart patched')
+
+# ---- app.dart: default to dark mode ----
+p2 = 'lib/app.dart'
+s2 = open(p2).read()
+s2 = s2.replace('themeMode: ThemeMode.system', 'themeMode: ThemeMode.dark')
+open(p2, 'w').write(s2)
+print('app.dart patched to dark mode default')
