@@ -52,6 +52,17 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
     super.dispose();
   }
 
+
+  /// Fills the form with a preset template's values.
+  void _applyTemplate(String title, int sh, int sm, int eh, int em, Set<int> days, String mode) {
+    setState(() {
+      _titleController.text = title;
+      _startTime = TimeOfDay(hour: sh, minute: sm);
+      _endTime = TimeOfDay(hour: eh, minute: em);
+      _selectedDays..clear()..addAll(days);
+      _mode = mode;
+    });
+  }
   Future<void> _pickTime(bool isStart) async {
     final picked = await showTimePicker(
       context: context,
@@ -146,6 +157,47 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          // Schedule templates for quick setup
+          if (widget.existing == null) ...[
+            Text('TEMPLATES', style: TextStyle(
+              fontSize: 11, fontWeight: FontWeight.w600,
+              letterSpacing: 0.8, color: scheme.primary)),
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 40,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  _TemplateChip(
+                    label: '9-5 Work',
+                    onTap: () => _applyTemplate('Work Hours', 9, 0, 17, 0, {1,2,3,4,5}, 'silent'),
+                  ),
+                  const SizedBox(width: 8),
+                  _TemplateChip(
+                    label: '1hr Lecture',
+                    onTap: () => _applyTemplate('Lecture', 9, 0, 10, 0, {1,2,3,4,5}, 'silent'),
+                  ),
+                  const SizedBox(width: 8),
+                  _TemplateChip(
+                    label: '2hr Lecture',
+                    onTap: () => _applyTemplate('Lecture', 9, 0, 11, 0, {1,2,3,4,5}, 'silent'),
+                  ),
+                  const SizedBox(width: 8),
+                  _TemplateChip(
+                    label: '30min Standup',
+                    onTap: () => _applyTemplate('Standup', 9, 0, 9, 30, {1,2,3,4,5}, 'vibrate'),
+                  ),
+                  const SizedBox(width: 8),
+                  _TemplateChip(
+                    label: 'Evening Class',
+                    onTap: () => _applyTemplate('Evening Class', 18, 0, 21, 0, {1,3}, 'silent'),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
+
 
           // Title field — label/hint have no l10n keys, kept in English
           TextField(
@@ -274,6 +326,31 @@ class _TimeTile extends StatelessWidget {
             Text(time, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Styled chip used in the template picker row on the add schedule screen.
+class _TemplateChip extends StatelessWidget {
+  final String label;
+  final VoidCallback onTap;
+  const _TemplateChip({required this.label, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        decoration: BoxDecoration(
+          color: scheme.primary.withValues(alpha: 0.12),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: scheme.primary.withValues(alpha: 0.3)),
+        ),
+        child: Text(label, style: TextStyle(
+          fontSize: 13, fontWeight: FontWeight.w500, color: scheme.primary)),
       ),
     );
   }

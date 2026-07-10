@@ -86,8 +86,25 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
           ),
+
           const SizedBox(height: 24),
 
+          // Theme mode selector: lets user switch between dark, light, system
+          _SectionHeader(title: 'APPEARANCE'),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: SegmentedButton<String>(
+                segments: const [
+                  ButtonSegment(value: 'dark', label: Text('Dark'), icon: Icon(Icons.dark_mode)),
+                  ButtonSegment(value: 'light', label: Text('Light'), icon: Icon(Icons.light_mode)),
+                  ButtonSegment(value: 'system', label: Text('Auto'), icon: Icon(Icons.brightness_auto)),
+                ],
+                selected: {settings.themeMode},
+                onSelectionChanged: (val) => settings.setThemeMode(val.first),
+              ),
+            ),
+          ),
           // "Privacy" has no l10n key — kept in English
           _SectionHeader(title: 'Privacy & Security'),
           Card(

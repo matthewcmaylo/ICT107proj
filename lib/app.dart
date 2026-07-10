@@ -20,7 +20,8 @@ class MeetingSilencerApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.dark,
+      // Theme mode is user-selectable in settings (dark, light, system)
+      themeMode: settings.flutterThemeMode,
       locale: settings.locale,
       supportedLocales: AppConstants.supportedLocales,
       localizationsDelegates: const [

@@ -22,6 +22,16 @@ class SettingsProvider extends ChangeNotifier {
   String get languageCode => _settings.languageCode;
   String get defaultMode => _settings.defaultMode;
   int get defaultAlertMinutes => _settings.defaultAlertMinutes;
+  String get themeMode => _settings.themeMode;
+
+  /// Returns the Flutter ThemeMode based on the stored preference.
+  ThemeMode get flutterThemeMode {
+    switch (_settings.themeMode) {
+      case 'light': return ThemeMode.light;
+      case 'system': return ThemeMode.system;
+      default: return ThemeMode.dark;
+    }
+  }
 
   // ── Setters ───────────────────────────────────────────────────────────────
 
@@ -39,6 +49,12 @@ class SettingsProvider extends ChangeNotifier {
 
   Future<void> setDefaultAlertMinutes(int minutes) async {
     _settings = _settings.copyWith(defaultAlertMinutes: minutes);
+    await _save();
+    notifyListeners();
+  }
+
+  Future<void> setThemeMode(String mode) async {
+    _settings = _settings.copyWith(themeMode: mode);
     await _save();
     notifyListeners();
   }
