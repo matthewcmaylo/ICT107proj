@@ -62,19 +62,17 @@ Tests for the world clock screen. Run on all platforms.
 
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TC-16 | Time zones display correctly | Open World Clock tab, check displayed times for listed cities. | Times match the real-world current time for each city. | PASS | City times matched real world times | PASS | Time zones displayed correctly, verified against iOS weather app on separate device. Tested by Jan Matthew Cmaylo. | PASS | World Clock displayed correct times for listed cities |
-| TC-17 | Time updates in real time | Leave the World Clock tab open for 1-2 minutes. | Displayed times increment correctly and do not stay frozen. | PASS | Times updated in real time, no freezing | PASS | Times updated in real time on simulator, no freezing. Tested by Jan Matthew Cmaylo. | PASS | Times updated in real time, no freezing |
-
+| TC-16 | Time zones display correctly | Open World Clock tab, check displayed times for listed cities. | Times match the real-world current time for each city. | PASS | City times matched real world times | PASS | Time zones displayed correctly, verified against iOS weather app on separate device. Tested by Jan Matthew Cmaylo. | PASS | World Clock displayed correct times for listed cities in Chrome. Tested by Subarna Ghamal. |
+| TC-17 | Time updates in real time | Leave the World Clock tab open for 1-2 minutes. | Displayed times increment correctly and do not stay frozen. | PASS | Times updated in real time, no freezing | PASS | Times updated in real time on simulator, no freezing. Tested by Jan Matthew Cmaylo. | PASS | Times updated correctly in real time with no freezing in Chrome. Tested by Subarna Ghamal. |
 ## Section 6 - Settings and Language
 
 Tests for the multilingual UI and settings persistence. Run on all platforms.
 
 | ID | Test Name | Steps | Expected Result | Android | Android Notes | iOS | iOS Notes | Web | Web Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| TC-18 | Language switches to French | Settings, Language, select French. | All UI labels change to French immediately. | PASS | Minor labels e.g. Save remain in English by design | PASS | UI labels switched from English to French immediately. Tested by Jan Matthew Cmaylo. | PASS | UI switched to French correctly |
-| TC-19 | Language switches to Arabic | Settings, Language, select Arabic. | UI shows Arabic text. Layout adjusts for RTL if implemented. | PASS | Arabic text displayed correctly | PASS | Arabic text displayed correctly, UI layout switched from left to right to right to left. Tested by Jan Matthew Cmaylo. | PASS | UI switched to Arabic correctly |
-| TC-20 | Language preference persists | Switch to Nepali, close and reopen the app. | App reopens in Nepali. | PASS | Language persisted after full app restart | PASS | Language switched to Nepali and persisted after restarting the app on simulator. Tested by Jan Matthew Cmaylo. | PASS | Language preference persisted after app restart |
-
+| TC-18 | Language switches to French | Settings, Language, select French. | All UI labels change to French immediately. | PASS | Minor labels e.g. Save remain in English by design | PASS | UI labels switched from English to French immediately. Tested by Jan Matthew Cmaylo. | PASS | UI switched to French correctly in Chrome. Tested by Subarna Ghamal. |
+| TC-19 | Language switches to Arabic | Settings, Language, select Arabic. | UI shows Arabic text. Layout adjusts for RTL if implemented. | PASS | Arabic text displayed correctly | PASS | Arabic text displayed correctly, UI layout switched from left to right to right to left. Tested by Jan Matthew Cmaylo. | PASS | UI switched to Arabic correctly in Chrome. RTL layout displayed correctly. Tested by Subarna Ghamal. |
+| TC-20 | Language preference persists | Switch to Nepali, close and reopen the app. | App reopens in Nepali. | PASS | Language persisted after full app restart | PASS | Language switched to Nepali and persisted after restarting the app on simulator. Tested by Jan Matthew Cmaylo. | PASS | Language preference persisted after closing and reopening the app in Chrome. Tested by Subarna Ghamal. |
 ## Section 7 - Edge Cases
 
 Tests for unusual or boundary conditions. Run on all platforms. Note: on web, "silences correctly" is not applicable, so TC-21 and TC-22 on web only verify the schedule saves and displays correctly without crashing.
